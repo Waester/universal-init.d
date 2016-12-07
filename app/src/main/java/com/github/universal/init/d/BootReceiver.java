@@ -25,17 +25,13 @@ public class BootReceiver extends BroadcastReceiver {
     }
 
     private void init() {
-        File dir = new File("/system/etc/init.d");
+        File dir = new File("/data/init.d");
 
         if (!dir.exists()) {
-            run("mount -o remount,rw /system");
-            run("mkdir /system/etc/init.d");
-            run("chmod 755 /system/etc/init.d");
-            run("mount -o remount,ro /system");
+            run("mkdir /data/init.d");
+            run("chmod 755 /data/init.d");
         } else if (!dir.canRead()) {
-            run("mount -o remount,rw /system");
-            run("chmod 755 /system/etc/init.d");
-            run("mount -o remount,ro /system");
+            run("chmod 755 /data/init.d");
         }
 
         // Get the list of init.d scripts
