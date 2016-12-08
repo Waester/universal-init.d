@@ -39,8 +39,10 @@ public class BootReceiver extends BroadcastReceiver {
         if (filelist != null) {
             Arrays.sort(filelist);
             for (File file : filelist) {
-                // Execute each script one after the other in the loop
-                run("sh " + file.toString());
+                if (file.canExecute()) {
+                    // Execute each script in alphabetical order
+                    run("sh " + file.toString());
+                }
             }
         }
     }
